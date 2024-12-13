@@ -4,7 +4,7 @@ import { FaBox, FaBlogger, FaSignOutAlt } from 'react-icons/fa';
 
 function Sidebar() {
   return (
-    <div className="w-1/5 md:p-6 h-full md:block hidden bg-gradient-to-b from-[#a3541f] to-[#f0c9a5] min-h-screen shadow-lg">
+    <div className="w-1/5 p-6 h-full md:block hidden bg-gradient-to-b from-[#a3541f] to-[#f0c9a5] min-h-screen shadow-lg">
       <h2 className="text-3xl font-bold text-white mb-6 border-b-2 border-white pb-2">Admin Menu</h2>
       <ul>
         <li className="mb-4">
