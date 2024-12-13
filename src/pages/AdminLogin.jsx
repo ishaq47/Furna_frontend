@@ -9,12 +9,13 @@ function AdminLogin({ onLogin }) {
 
     // Mock login logic
     onLogin();
-    navigate('/admin/dashboard');
+    navigate('/admin');
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
-      <h2 className="text-2xl font-bold  font-roboto mb-4">Admin Login</h2>
+    <div className='min-h-screen flex p-4 items-center'>
+    <div className="md:min-w-[400px]  mx-auto  bg-white p-6 rounded-xl shadow">
+      <h2 className="text-2xl font-bold  mb-4">Admin Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700">
@@ -45,6 +46,7 @@ function AdminLogin({ onLogin }) {
           Login
         </button>
       </form>
+    </div>
     </div>
   );
 }

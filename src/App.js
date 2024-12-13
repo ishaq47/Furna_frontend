@@ -8,6 +8,10 @@ import AdminDashboard from './pages/AdminDashboard';
 import HeroSection from './pages/HeroSection';
 import ProtectedRoute from './components/ProtectedRoute';
 import Footer from './components/Footer';
+import Blogs from './components/dashboard/Blogs';
+import DashboardProducts from './components/dashboard/DashboardProducts';
+import ContactUs from './pages/ContacUs';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,26 +23,33 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen bg-gray-100 rubik-dirt-regular text-[#e67429fa]">
         <Navbar />
         <Routes>
           <Route path="/" element={<HeroSection />} />
           <Route path="/products" element={<Products />} />
           <Route path="/about" element={<About />} />
-          <Route 
-            path="/admin/login" 
-            element={<AdminLogin onLogin={handleLogin} />} 
+          <Route path="/contact" element={<ContactUs />} />
+
+          <Route
+            path="/admin/login"
+            
+            element={<AdminLogin  onLogin={handleLogin} />}
           />
-          <Route 
-            path="/admin/dashboard" 
+          <Route
+            path="/admin"
             element={
               <ProtectedRoute isAuthenticated={isAuthenticated}>
                 <AdminDashboard />
               </ProtectedRoute>
-            } 
-          />
+              
+            }
+          >
+            <Route index   element={<DashboardProducts />} />
+            <Route path="/admin/blogs" element={<Blogs />} />
+            </Route>
         </Routes>
-        <Footer/>
+        <Footer />
       </div>
     </Router>
   );
