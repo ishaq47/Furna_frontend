@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Products from './pages/Products';
@@ -11,15 +11,34 @@ import Footer from './components/Footer';
 import Blogs from './components/dashboard/Blogs';
 import DashboardProducts from './components/dashboard/DashboardProducts';
 import ContactUs from './pages/ContacUs';
+import { baseUrl } from './BaseUrl';
+import axios from 'axios';
+import AdminRegister from './pages/AdminRegister';
 
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Function to handle login (mock login for simplicity)
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (token) {
+      axios.get(`${baseUrl}/api/admin/dashboard`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(() => {
+        setIsAuthenticated(true);
+      }).catch(() => {
+        localStorage.removeItem('adminToken');
+        setIsAuthenticated(false);
+      });
+    }
+  }, []);
+
   const handleLogin = () => {
     setIsAuthenticated(true);
   };
+
 
   return (
     <Router>
@@ -30,6 +49,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/admin/register" element={<AdminRegister />} />
 
           <Route
             path="/admin/login"
@@ -37,14 +57,13 @@ function App() {
             element={<AdminLogin  onLogin={handleLogin} />}
           />
           <Route
-            path="/admin"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <AdminDashboard />
-              </ProtectedRoute>
-              
-            }
-          >
+          path="/admin"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        >
             <Route index   element={<DashboardProducts />} />
             <Route path="/admin/blogs" element={<Blogs />} />
             </Route>

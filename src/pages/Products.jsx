@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Home, Sofa, Lamp, ShoppingCart, Star } from "lucide-react";
 import ProductList from "./ProducatList";
 import axios from 'axios';
+import { baseUrl } from "../BaseUrl";
 
 const categories = [
   { name: "All", icon: <Home size={24} /> },
@@ -21,7 +22,7 @@ function Products() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products');
+      const response = await axios.get(`${baseUrl}/api/products`);
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
