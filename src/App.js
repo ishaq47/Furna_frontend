@@ -13,7 +13,7 @@ import DashboardProducts from './components/dashboard/DashboardProducts';
 import ContactUs from './pages/ContacUs';
 import { baseUrl } from './BaseUrl';
 import axios from 'axios';
-import AdminRegister from './pages/AdminRegister';
+
 
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/admin/register" element={<AdminRegister />} />
+    
 
           <Route
             path="/admin/login"
